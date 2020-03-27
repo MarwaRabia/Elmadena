@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient"
+    tools:context=".Login">
+
+    <ImageView
+        android:id="@+id/loim"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp"
+        android:src="@drawable/logo1" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/text1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/loim"
+        android:textColorHint="@color/colorPrimaryDark"
+
+        >
+        <EditText
+            android:id="@+id/emaillogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:padding="5dp"
+            android:hint="ادخل البريد الالكتروني الخاص بك"
+            android:drawableRight="@drawable/email"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/text2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text1"
+        android:textColorHint="@color/colorPrimaryDark"
+        app:passwordToggleEnabled="true"
+
+
+
+        >
+        <EditText
+            android:id="@+id/passwordlogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:hint="ادخل كلمة المرور الخاصه بك"
+            android:padding="5dp"
+            android:inputType="textWebPassword"
+
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+
+
+
+
+
+
+
+    <Button
+        android:id="@+id/loginbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text2"
+        android:layout_centerInParent="true"
+        android:text="دخول"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_margin="10dp"
+        android:background="@drawable/buttonship"
+        android:textColor="@color/colorPrimaryDark"        />
+    <TextView
+        android:id="@+id/registerlink"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/loginbutton"
+        android:text="إنشاء حساب جديد"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:textColor="@color/colorPrimaryDark"
+        android:fontFamily="@font/andlso"/>
+    <TextView
+        android:id="@+id/registeror"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/registerlink"
+        android:text="أو"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:textColor="@color/colorPrimaryDark"
+        android:fontFamily="@font/andlso"/>
+    <TextView
+        android:id="@+id/register"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/registeror"
+        android:text="التسجيل عبر"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:textColor="@color/colorPrimaryDark"
+        android:fontFamily="@font/andlso"/>
+
+
+</RelativeLayout>

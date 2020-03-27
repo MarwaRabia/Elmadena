@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_home"
+        android:title="@string/home"
+        android:icon="@drawable/home"/>
+    <item
+        android:id="@+id/nav_submit"
+        android:title="@string/submitting"
+        android:icon="@drawable/friends"
+
+        />
+    <item
+        android:id="@+id/nav_building"
+        android:title="@string/buildigs"
+        android:icon="@drawable/messages"
+        />
+    <item
+        android:id="@+id/nav_settings"
+        android:title="@string/settings"
+        android:icon="@drawable/settings"
+        />
+    <item
+        android:id="@+id/nav_about"
+        android:title="@string/about"
+        android:icon="@drawable/messages"
+        />
+
+    <item
+        android:id="@+id/logout"
+        android:title="@string/logout"
+        android:icon="@drawable/logout"
+        />
+
+
+</menu>

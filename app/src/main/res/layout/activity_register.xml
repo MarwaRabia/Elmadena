@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient"
+    tools:context=".Login">
+
+    <ImageView
+        android:id="@+id/loim"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp"
+        android:src="@drawable/logo1" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/text1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/loim"
+        android:textColorHint="@color/colorPrimaryDark"
+
+       >
+        <EditText
+            android:id="@+id/emailregister"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:padding="5dp"
+            android:hint="ادخل البريد الالكتروني الخاص بك"
+            android:drawableRight="@drawable/email"
+
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+<com.google.android.material.textfield.TextInputLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/text1"
+    android:id="@+id/text2"
+    app:passwordToggleEnabled="true"
+    android:textColorHint="@color/colorPrimaryDark"
+    >
+    <EditText
+        android:id="@+id/passwordregister"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:hint="ادخل كلمة المرور الخاصه بك"
+        android:padding="5dp"
+android:inputType="textWebPassword"
+
+        />
+
+</com.google.android.material.textfield.TextInputLayout>
+
+<com.google.android.material.textfield.TextInputLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/text3"
+    android:layout_below="@id/text2"
+    app:passwordToggleEnabled="true"
+    android:textColorHint="@color/colorPrimaryDark"
+
+
+
+    >
+    <EditText
+        android:id="@+id/confirmregisterpass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:hint="اعد ادخال كلمة المرور الخاصه بك"
+        android:padding="5dp"
+        android:inputType="textWebPassword"
+
+        />
+
+</com.google.android.material.textfield.TextInputLayout>
+
+
+
+    <Button
+        android:id="@+id/creatbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text3"
+        android:layout_centerInParent="true"
+        android:text="إنشاء حساب"
+        android:layout_margin="10dp"
+        android:background="@drawable/buttonship"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:textColor="@color/colorPrimaryDark"
+
+
+        />
+
+
+
+</RelativeLayout>

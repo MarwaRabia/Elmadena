@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1040994522943",
+    "firebase_url": "https://elmadena-533d4.firebaseio.com",
+    "project_id": "elmadena-533d4",
+    "storage_bucket": "elmadena-533d4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1040994522943:android:0cb5153403834641a1258a",
+        "android_client_info": {
+          "package_name": "com.example.elmadena"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1040994522943-92mvmugbo4kv2r6l8b4p0vq8elpap4h5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB_orf8MH3KkKc8qipAOBbFlbWItEPD--4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1040994522943-92mvmugbo4kv2r6l8b4p0vq8elpap4h5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

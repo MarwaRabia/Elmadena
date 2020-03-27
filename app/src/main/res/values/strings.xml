@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Elmadena</string>
+    <string name="home">الرئيسية</string>
+    <string name="submitting">التقديم</string>
+    <string name="buildigs">المبانى</string>
+    <string name="settings">الإعدادات</string>
+    <string name="about">عن البرنامج</string>
+    <string name="logout">تسجيل الخروج</string>
+    <string name="app_open">Open</string>
+    <string name="app_close">Close</string>
+
+
+</resources>
