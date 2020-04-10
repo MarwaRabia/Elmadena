@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+   android:gravity="center"
+    android:background="@drawable/gradient"
+    tools:context=".Info">
+
+    <TextView
+        android:textColor="#7AC5E6"
+        android:textSize="40sp"
+        android:layout_marginRight="40dp"
+        android:paddingRight="15dp"
+        android:layout_marginLeft="40dp"
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_style"
+        android:text="هو تطبيق تم انشائه لسهوله التواصل مع اداره المدينه الجامعيه بدون الطرق التقليديه السابقه واستبدالها بأساليب التكنولوجيا الحديثه للتواصل عن بعد ."
+        />
+
+<!--    <ImageView-->
+<!--        android:id="@+id/goole"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_weight="1"-->
+<!--        android:src="@drawable/google"/>-->
+
+</LinearLayout>

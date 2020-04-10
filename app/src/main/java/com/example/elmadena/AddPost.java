@@ -2,6 +2,7 @@ package com.example.elmadena;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -18,7 +19,10 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -26,22 +30,34 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FieldValue;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.grpc.Compressor;
 
 public class AddPost extends AppCompatActivity {
     private static final int Gallery_Pick = 1;
-    private Uri ImageUri;
+    private Uri ImageUri= null;
     private ProgressDialog loadingBar;
-
+    private StorageReference storageReference;
+    private FirebaseFirestore firebaseFirestore;
+    private FirebaseAuth firebaseAuth;
+    Bitmap compressedImageFile;
     private StorageReference PostsImagesRefrence;
     private DatabaseReference UsersRef, PostsRef;
     private FirebaseAuth mAuth;
@@ -50,8 +66,8 @@ public class AddPost extends AppCompatActivity {
 
     @BindView(R.id.update_post)
     Toolbar mMainAppToolbar;
-    @BindView(R.id.postTitle)
-    EditText mPostTitle;
+//    @BindView(R.id.postTitle)
+//    EditText mPostTitle;
     @BindView(R.id.postImage)
     ImageView mPostImage;
     @BindView(R.id.postDescrip)
@@ -60,7 +76,15 @@ public class AddPost extends AppCompatActivity {
     Button mUpload;
     String Description;
 
+
+    String randomName;
+    String downloadUri;
+    String desc;
+    String downloadthumbUri;
+
+
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_post);
@@ -69,6 +93,9 @@ public class AddPost extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         current_user_id = mAuth.getCurrentUser().getUid();
         loadingBar = new ProgressDialog(this);
+        storageReference = FirebaseStorage.getInstance().getReference();
+        firebaseFirestore = FirebaseFirestore.getInstance();
+        firebaseAuth = FirebaseAuth.getInstance();
 
         PostsImagesRefrence = FirebaseStorage.getInstance().getReference();
 //        UsersRef = FirebaseDatabase.getInstance().getReference().child("Users");
@@ -78,7 +105,9 @@ public class AddPost extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle("إضافة منشور جديد");
-        getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
+
+
+
         mPostImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -86,10 +115,14 @@ public class AddPost extends AppCompatActivity {
 
             }
         });
+
+
         mUpload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                validatePostInfo();
+
+uplpad();
+
 
             }
         });
@@ -98,115 +131,139 @@ public class AddPost extends AppCompatActivity {
 
     }
 
+    private void uplpad() {
 
 
-    private void validatePostInfo()
-    {
-        Description = mPostDescrip.getText().toString();
-
-        if(ImageUri == null)
-        {
-            Toast.makeText(this, "Please select post image...", Toast.LENGTH_SHORT).show();
-        }
-        else if(TextUtils.isEmpty(Description))
-        {
-            Toast.makeText(this, "Please say something about your image...", Toast.LENGTH_SHORT).show();
-        }
-        else
-        {
-            loadingBar.setTitle("Add New Post");
-            loadingBar.setMessage("Please wait, while we are updating your new post...");
-            loadingBar.show();
-            loadingBar.setCanceledOnTouchOutside(true);
-
-            StoringImageToFirebaseStorage();
-        }
-    }
-
-    private void StoringImageToFirebaseStorage()
-    {
-        Calendar calFordDate = Calendar.getInstance();
-        SimpleDateFormat currentDate = new SimpleDateFormat("dd-MMMM-yyyy");
-        saveCurrentDate = currentDate.format(calFordDate.getTime());
-
-        SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm");
-        saveCurrentTime = currentTime.format(calFordDate.getTime());
-
-        postRandomName = saveCurrentDate + saveCurrentTime;
 
 
-        StorageReference filePath = PostsImagesRefrence.child("Post Images").child(ImageUri.getLastPathSegment() + postRandomName + ".jpg");
+        desc = mPostDescrip.getText().toString();
 
-        filePath.putFile(ImageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task)
-            {
-                if(task.isSuccessful())
-                {
-                    downloadUrl = task.getResult().getMetadata().getReference().getDownloadUrl().toString();
-                    Toast.makeText(AddPost.this, "image uploaded successfully to Storage...", Toast.LENGTH_SHORT).show();
-//                    SavingPostInformationToDatabase();
+        if(!TextUtils.isEmpty(desc) && ImageUri != null){
+            bar();
 
-                }
-                else
-                {
-                    String message = task.getException().getMessage();
-                    Toast.makeText(AddPost.this, "Error occured: " + message, Toast.LENGTH_SHORT).show();
-                }
-            }
+            randomName = UUID.randomUUID().toString();
+
+//                    imageFile();
+
+//                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+////                    compressedImageFile.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+//                    byte[] imageData = baos.toByteArray();
 
 
-            private void SavingPostInformationToDatabase()
-            {
+            final StorageReference filePath = storageReference.child("post_images")
+                    .child(randomName + ".jpg");
 
-                PostsRef.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot)
-                    {
-                        if(dataSnapshot.exists())
+            final UploadTask uploadTask = filePath.putFile(ImageUri);
+
+
+
+            uploadTask.addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onComplete(@NonNull final Task<UploadTask.TaskSnapshot> task) {
+
+
+
+                    Task<Uri> urlTask =uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                        @Override
+                        public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception
                         {
+                            if (!task.isSuccessful())
+                            {
+                                throw task.getException();
+                            }
 
-//                            String userFullName = dataSnapshot.child("fullname").getValue().toString();
-//                            String userProfileImage = dataSnapshot.child("profileimage").getValue().toString();
+                            downloadUri = filePath.getDownloadUrl().toString();
+                            downloadthumbUri=filePath.getDownloadUrl().toString();
 
-                            HashMap postsMap = new HashMap();
-                            postsMap.put("uid", current_user_id);
-                            postsMap.put("date", saveCurrentDate);
-                            postsMap.put("time", saveCurrentTime);
-                            postsMap.put("description", Description);
-                            postsMap.put("postimage", downloadUrl);
-                            PostsRef.child(current_user_id ).updateChildren(postsMap)
-                                    .addOnCompleteListener(new OnCompleteListener() {
-                                        @Override
-                                        public void onComplete(@NonNull Task task)
-                                        {
-                                            if(task.isSuccessful())
-                                            {
-                                                sendUserTOMainActivity();
-                                                Toast.makeText(AddPost.this, "New Post is updated successfully.", Toast.LENGTH_SHORT).show();
-                                                loadingBar.dismiss();
-                                            }
-                                            else
-                                            {
-                                                Toast.makeText(AddPost.this, "Error Occured while updating your post.", Toast.LENGTH_SHORT).show();
-                                                loadingBar.dismiss();
-                                            }
-                                        }
-                                    });
+                            return filePath.getDownloadUrl();
                         }
+                    }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Uri> task)
+                        {
+                            if (task.isSuccessful())
+                            {
+                                downloadUri = task.getResult().toString();
+                                downloadthumbUri=task.getResult().toString();
 
-                    }
 
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
+                                Toast.makeText(AddPost.this, "got the Product image Url Successfully...", Toast.LENGTH_SHORT).show();
 
-                    }
-                });
-            }
-        });
+                                savedata();
+                            }
+                        }
+                    });
+//
+//                            if(task.isSuccessful()){
+//
+//
+////                                thumbFile();
+//
+//
+//                            } else {
+//
+//                               loadingBar.dismiss();
+//
+//                            }
 
+
+
+
+                }
+            });
+
+
+        }
 
     }
+
+
+
+    private void bar() {
+
+
+        loadingBar.setTitle("اضافة منشور جديد");
+        loadingBar.setMessage("من فضلك انتظر حتى يتم اضافة المنشور");
+        loadingBar.show();
+        loadingBar.setCanceledOnTouchOutside(true);
+
+    }
+
+
+    private void savedata() {
+
+        Map<String, Object> postMap = new HashMap<>();
+        postMap.put("image_url", downloadUri);
+        postMap.put("image_thumb", downloadthumbUri);
+        postMap.put("desc", desc);
+        postMap.put("user_id", current_user_id);
+        postMap.put("timestamp", FieldValue.serverTimestamp());
+
+        firebaseFirestore.collection("Posts").add(postMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentReference> task) {
+
+                if(task.isSuccessful()){
+
+                    Toast.makeText(AddPost.this, "تم اضافة المنشور بنجاح", Toast.LENGTH_LONG).show();
+                 sendUserTOMainActivity();
+
+                } else {
+
+
+                }
+
+               loadingBar.dismiss();
+
+            }
+        });
+    }
+
+
+
+
+
+
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -243,7 +300,212 @@ public class AddPost extends AppCompatActivity {
             mPostImage.setImageURI(ImageUri);
         }
     }
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//
+//    public  void  downloadPost(){
+//
+//
+//
+//        final String desc = mPostDescrip.getText().toString();
+//
+//        if(!TextUtils.isEmpty(desc) &&  ImageUri!= null){
+//
+//            loadingBar.setTitle("Add New Post");
+//            loadingBar.setMessage("Please wait, while we are updating your new post...");
+//            loadingBar.show();
+//            loadingBar.setCanceledOnTouchOutside(true);
+//
+//            final String randomName = UUID.randomUUID().toString();
+//
+////             PHOTO UPLOAD
+//            File newImageFile = new File(ImageUri.getPath());
+////            try {
+////
+////                compressedImageFile =new Compressor(AddPost.this)
+////                        .setMaxHeight(720)
+////                        .setMaxWidth(720)
+////                        .setQuality(50)
+////                        .compressToBitmap(newImageFile);
+////
+////            } catch (IOException e) {
+////                e.printStackTrace();
+////            }
+//
+//            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+////          compressedImageFile.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+//            byte[] imageData = baos.toByteArray();
+//
+//            // PHOTO UPLOAD
+//
+//            UploadTask filePath = storageReference.child("post_images").child(randomName + ".jpg").putBytes(imageData);
+//
+//            filePath.addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+//                @Override
+//                public void onComplete(@NonNull final Task<UploadTask.TaskSnapshot> task) {
+//
+//                    final String downloadUri = task.getResult().getUploadSessionUri().toString();
+//
+//                    if(task.isSuccessful()){
+//
+//                        File newThumbFile = new File(ImageUri.getPath());
+////                        try {
+////
+////                            compressedImageFile = new Compressor(AddPost.this)
+////                                    .setMaxHeight(100)
+////                                    .setMaxWidth(100)
+////                                    .setQuality(1)
+////                                    .compressToBitmap(newThumbFile);
+////
+////                        } catch (IOException e) {
+////                            e.printStackTrace();
+////                        }
+//
+//                        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+////                        compressedImageFile.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+//                        byte[] thumbData = baos.toByteArray();
+//
+//                        UploadTask uploadTask = storageReference.child("post_images/thumbs")
+//                                .child(randomName + ".jpg").putBytes(thumbData);
+//
+//                        uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+//                            @Override
+//                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+//
+//                                String downloadthumbUri = taskSnapshot.getUploadSessionUri().toString();
+//
+//                                Map<String, Object> postMap = new HashMap<>();
+//                                postMap.put("image_url", downloadUri);
+//                                postMap.put("image_thumb", downloadthumbUri);
+//                                postMap.put("desc", desc);
+//                                postMap.put("user_id", current_user_id);
+//                                postMap.put("timestamp", FieldValue.serverTimestamp());
+//
+//                                firebaseFirestore.collection("Posts").add(postMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+//                                    @Override
+//                                    public void onComplete(@NonNull Task<DocumentReference> task) {
+//
+//                                        if(task.isSuccessful()){
+//
+//                                            Toast.makeText(AddPost.this, "Post was added", Toast.LENGTH_LONG).show();
+//                                            Intent mainIntent = new Intent(AddPost.this, MainActivity.class);
+//                                            startActivity(mainIntent);
+//                                            finish();
+//                                            loadingBar.dismiss();
+//
+//
+//                                        } else {
+//
+//
+//                                        }
+//
+//                                        loadingBar.dismiss();
+//
+//                                    }
+//                                });
+//
+//                            }
+//                        }).addOnFailureListener(new OnFailureListener() {
+//                            @Override
+//                            public void onFailure(@NonNull Exception e) {
+//
+//                                //Error handling
+//
+//                            }
+//                        });
+//
+//
+//                    } else {
+//
+//                        loadingBar.dismiss();
+//
+//                    }
+//
+//                }
+//            });
+//
+//
+//        }
+//    }
+
+
+
+
+
+
+
 
 
 //
@@ -434,3 +696,111 @@ public class AddPost extends AppCompatActivity {
 //        }
 //    }
 //}
+
+//    private void validatePostInfo()
+//    {
+//        Description = mPostDescrip.getText().toString();
+//
+//        if(ImageUri == null)
+//        {
+//            Toast.makeText(this, "Please select post image...", Toast.LENGTH_SHORT).show();
+//        }
+//        else if(TextUtils.isEmpty(Description))
+//        {
+//            Toast.makeText(this, "Please say something about your image...", Toast.LENGTH_SHORT).show();
+//        }
+//        else
+//        {
+//            loadingBar.setTitle("Add New Post");
+//            loadingBar.setMessage("Please wait, while we are updating your new post...");
+//            loadingBar.show();
+//            loadingBar.setCanceledOnTouchOutside(true);
+//
+//            StoringImageToFirebaseStorage();
+//        }
+//    }
+//
+//    private void StoringImageToFirebaseStorage()
+//    {
+//        Calendar calFordDate = Calendar.getInstance();
+//        SimpleDateFormat currentDate = new SimpleDateFormat("dd-MMMM-yyyy");
+//        saveCurrentDate = currentDate.format(calFordDate.getTime());
+//
+//        SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm");
+//        saveCurrentTime = currentTime.format(calFordDate.getTime());
+//
+//        postRandomName = saveCurrentDate + saveCurrentTime;
+//
+//
+//        StorageReference filePath = PostsImagesRefrence.child("Post Images").child(ImageUri.getLastPathSegment() + postRandomName + ".jpg");
+//
+//        filePath.putFile(ImageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+//            @Override
+//            public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task)
+//            {
+//                if(task.isSuccessful())
+//                {
+//                    downloadUrl = task.getResult().getMetadata().getReference().getDownloadUrl().toString();
+//                    Toast.makeText(AddPost.this, "image uploaded successfully to Storage...", Toast.LENGTH_SHORT).show();
+//                    SavingPostInformationToDatabase();
+//
+//                }
+//                else
+//                {
+//                    String message = task.getException().getMessage();
+//                    Toast.makeText(AddPost.this, "Error occured: " + message, Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//
+//
+//            private void SavingPostInformationToDatabase()
+//            {
+//
+//                PostsRef.addValueEventListener(new ValueEventListener() {
+//                    @Override
+//                    public void onDataChange(DataSnapshot dataSnapshot)
+//                    {
+//                        if(dataSnapshot.exists())
+//                        {
+//
+//                            String userFullName = dataSnapshot.child("fullname").getValue().toString();
+//                            String userProfileImage = dataSnapshot.child("profileimage").getValue().toString();
+//
+//                            HashMap postsMap = new HashMap();
+//                            postsMap.put("uid", current_user_id);
+//                            postsMap.put("date", saveCurrentDate);
+//                            postsMap.put("time", saveCurrentTime);
+//                            postsMap.put("description", Description);
+//                            postsMap.put("postimage", downloadUrl);
+//                            PostsRef.child(current_user_id ).updateChildren(postsMap)
+//                                    .addOnCompleteListener(new OnCompleteListener() {
+//                                        @Override
+//                                        public void onComplete(@NonNull Task task)
+//                                        {
+//                                            if(task.isSuccessful())
+//                                            {
+//                                                sendUserTOMainActivity();
+//                                                Toast.makeText(AddPost.this, "New Post is updated successfully.", Toast.LENGTH_SHORT).show();
+//                                                loadingBar.dismiss();
+//                                            }
+//                                            else
+//                                            {
+//                                                Toast.makeText(AddPost.this, "Error Occured while updating your post.", Toast.LENGTH_SHORT).show();
+//                                                loadingBar.dismiss();
+//                                            }
+//                                        }
+//                                    });
+//                        }
+//
+//                    }
+//
+//                    @Override
+//                    public void onCancelled(DatabaseError databaseError) {
+//
+//                    }
+//                });
+//            }
+//        });
+//
+//
+//    }

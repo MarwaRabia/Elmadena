@@ -1,6 +1,7 @@
 package com.example.elmadena;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -52,4 +53,6 @@ public class SplashScreen extends AppCompatActivity {
 
 
     }
+
+
 }

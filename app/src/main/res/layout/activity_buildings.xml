@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/setupToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@drawable/gradient"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
+        >
+
+        <Button
+            android:id="@+id/A"
+            android:padding="10dp"
+            android:textColor="@color/colorPrimaryDark"
+            android:background="@drawable/button_style"
+            android:textSize="30sp"
+            android:text="@string/A"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_margin="10dp"
+
+            />
+        <Button
+            android:id="@+id/B"
+            android:padding="10dp"
+            android:textColor="@color/colorPrimaryDark"
+            android:background="@drawable/button_style"
+            android:textSize="30sp"
+            android:text="@string/B"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_margin="10dp"
+
+            />
+        <Button
+            android:id="@+id/C"
+            android:padding="10dp"
+            android:textColor="@color/colorPrimaryDark"
+            android:background="@drawable/button_style"
+            android:textSize="30sp"
+            android:text="@string/C"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_margin="10dp"
+
+            />
+        <Button
+            android:id="@+id/D"
+            android:padding="10dp"
+            android:textColor="@color/colorPrimaryDark"
+            android:background="@drawable/button_style"
+            android:textSize="30sp"
+            android:text="@string/D"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_margin="10dp"
+
+            />
+        <Button
+            android:id="@+id/E"
+            android:padding="10dp"
+            android:textColor="@color/colorPrimaryDark"
+            android:background="@drawable/button_style"
+            android:textSize="30sp"
+            android:text="@string/E"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_margin="10dp"
+
+            />
+        <Button
+            android:id="@+id/F"
+            android:padding="10dp"
+            android:textColor="@color/colorPrimaryDark"
+            android:background="@drawable/button_style"
+            android:textSize="30sp"
+            android:text="@string/F"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_margin="10dp"
+
+            />
+        <Button
+            android:id="@+id/G"
+            android:padding="10dp"
+            android:textColor="@color/colorPrimaryDark"
+            android:background="@drawable/button_style"
+            android:textSize="30sp"
+            android:text="@string/G"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_margin="10dp"
+
+            />
+
+
+    </LinearLayout>
+
+
+
+
+
+
+
+</LinearLayout>
+</ScrollView>

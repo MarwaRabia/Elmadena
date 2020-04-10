@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -25,6 +31,7 @@
         android:textColorHint="@color/colorPrimaryDark"
 
         >
+
         <EditText
             android:id="@+id/emaillogin"
             android:layout_width="match_parent"
@@ -88,11 +95,11 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/loginbutton"
         android:text="إنشاء حساب جديد"
-        android:textSize="30sp"
-        android:textStyle="bold"
+        android:textSize="25sp"
         android:gravity="center"
+        android:layout_marginTop="5dp"
         android:textColor="@color/colorPrimaryDark"
-        android:fontFamily="@font/andlso"/>
+     />
     <TextView
         android:id="@+id/registeror"
         android:layout_width="match_parent"
@@ -102,19 +109,50 @@
         android:textSize="30sp"
         android:textStyle="bold"
         android:gravity="center"
+        android:layout_marginTop="5dp"
         android:textColor="@color/colorPrimaryDark"
-        android:fontFamily="@font/andlso"/>
+/>
     <TextView
         android:id="@+id/register"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/registeror"
         android:text="التسجيل عبر"
-        android:textSize="30sp"
-        android:textStyle="bold"
+        android:textSize="25sp"
         android:gravity="center"
+        android:layout_marginTop="5dp"
         android:textColor="@color/colorPrimaryDark"
-        android:fontFamily="@font/andlso"/>
+     />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/register"
+        android:gravity="center"
+        android:layout_marginTop="30dp">
+
+
+<ImageView
+    android:id="@+id/goole"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    android:src="@drawable/google"/>
+
+        <ImageView
+            android:id="@+id/facebook"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/facebook" />
+        <ImageView
+            android:id="@+id/twitter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/twitter" />
+
+    </LinearLayout>
 
 
 </RelativeLayout>
+</ScrollView>

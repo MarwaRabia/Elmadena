@@ -84,7 +84,8 @@ public class Register extends AppCompatActivity {
                     if (task.isSuccessful()){
 sendUserTOMainActivity();
 
-                        Toast.makeText(Register.this, "creat account is succefully", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Register.this, "تم انشاء الحساب", Toast.LENGTH_SHORT).show();
+
                         mProgressDialog.dismiss();
                     }
                     else{
@@ -118,4 +119,6 @@ sendUserTOMainActivity();
         finish();
 
     }
+
+
 }

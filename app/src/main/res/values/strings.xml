@@ -8,6 +8,65 @@
     <string name="logout">تسجيل الخروج</string>
     <string name="app_open">Open</string>
     <string name="app_close">Close</string>
+    <string name="setup_name_hint">Your Name...</string>
+    <string name="setup_save_btn">Save Account Settings</string>
+    <string name="setup_name_hint_text">اسم المستخدم</string>
+    <string name="setup_btn_name_text">Save Account Settings</string>
+    <string name="A">أ</string>
+    <string name="B">ب</string>
+    <string name="C">ج</string>
+    <string name="D">د</string>
+    <string name="E">هـ</string>
+    <string name="F">و</string>
+    <string name="G">ز</string>
+
+
+
+    <!-- Strings for Color-Theme preference [CHAR LIMIT=30] -->
+    <string name="settings_color_label">Color Theme</string>
+    <string name="settings_color_key">color theme</string>
+    <string name="settings_color_default">white</string>
+
+    <!-- Label for color theme white preference [CHAR LIMIT=20] -->
+    <string name="settings_color_white_label">White</string>
+    <string name="settings_color_white_value">white</string>
+
+    <!-- Label for color theme sky blue preference [CHAR LIMIT=20] -->
+    <string name="settings_color_sky_blue_label">Sky Blue</string>
+    <string name="settings_color_sky_blue_value">sky blue</string>
+
+    <!-- Label for color theme dark blue preference [CHAR LIMIT=20] -->
+    <string name="settings_color_dark_blue_label">Dark Blue</string>
+    <string name="settings_color_dark_blue_value">dark blue</string>
+
+    <!-- Label for color theme violet preference [CHAR LIMIT=20] -->
+    <string name="settings_color_violet_label">Violet</string>
+    <string name="settings_color_violet_value">violet</string>
+
+    <!-- Label for color theme light green preference [CHAR LIMIT=20] -->
+    <string name="settings_color_light_green_label">Light Green</string>
+    <string name="settings_color_light_green_value">light green</string>
+
+    <!-- Label for color theme green preference [CHAR LIMIT=20] -->
+    <string name="settings_color_green_label">Green</string>
+    <string name="settings_color_green_value">green</string>
+
+    <!-- Strings for Text Size preference [CHAR LIMIT=30] -->
+    <string name="settings_text_size_label">Text Size</string>
+    <string name="settings_text_size_key" translatable="false">text size</string>
+    <string name="settings_text_size_default" translatable="false">@string/settings_text_size_medium_value</string>
+
+    <!-- Label for text size small preference [CHAR LIMIT=20] -->
+    <string name="settings_text_size_small_label">Small</string>
+    <string name="settings_text_size_small_value" translatable="false">small</string>
+
+    <!-- Label for text size medium preference [CHAR LIMIT=20] -->
+    <string name="settings_text_size_medium_label">Medium</string>
+    <string name="settings_text_size_medium_value" translatable="false">medium</string>
+
+    <!-- Label for text size large preference [CHAR LIMIT=20] -->
+    <string name="settings_text_size_large_label">Large</string>
+    <string name="settings_text_size_large_value" translatable="false">large</string>
 
 
 </resources>

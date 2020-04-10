@@ -26,7 +26,7 @@
         android:layout_marginBottom="173dp"
         android:fontFamily="@font/aldhabi"
         android:text="المدينة الجامعية"
-        android:textColor="#B6B6B6"
+        android:textColor="@color/colorPrimaryDark"
         android:textSize="50sp"
         android:textStyle="bold" />
 

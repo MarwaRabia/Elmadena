@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/gradient">
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -18,40 +23,50 @@
         android:layout_margin="2dp"
         android:orientation="vertical"
         android:layout_below="@id/update_post">
-        <EditText
-            android:id="@+id/postTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:singleLine="true"
-            android:hint=" Enter title"/>
+
+<!--        <EditText-->
+<!--            android:id="@+id/postTitle"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:padding="10dp"-->
+<!--            android:singleLine="true"-->
+<!--            android:hint=" Enter title"/>-->
+
+
         <ImageButton
             android:id="@+id/postImage"
             android:layout_width="match_parent"
             android:layout_height="300dp"
-            android:background="@drawable/gradient"
             android:src="@drawable/select_image"
-
+            android:layout_margin="5dp"
+            android:background="#171E43"
             android:scaleType="centerCrop"/>
+
         <EditText
             android:id="@+id/postDescrip"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:singleLine="true"
-            android:hint=" Enter post"
-            android:minHeight="150dp"
+            android:hint=" محتوى المنشور"
+            android:layout_marginTop="10dp"
+            android:layout_margin="10dp"
+            android:textColorHint="@color/colorPrimaryDark"
             android:inputType="textMultiLine|textCapSentences"/>
         <Button
             android:id="@+id/upload"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/gradient"
             android:layout_gravity="end"
-            android:text="upload"
+            android:text="اضافة المنشور"
+            android:layout_marginTop="10dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/button_style"
+            android:textColor="@color/colorPrimaryDark"
             android:textStyle="bold"/>
+
 
         
     </LinearLayout>
 
 </RelativeLayout>
+</ScrollView>

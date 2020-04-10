@@ -7,13 +7,13 @@
     <item
         android:id="@+id/nav_submit"
         android:title="@string/submitting"
-        android:icon="@drawable/friends"
+        android:icon="@drawable/information"
 
         />
     <item
         android:id="@+id/nav_building"
         android:title="@string/buildigs"
-        android:icon="@drawable/messages"
+        android:icon="@drawable/city"
         />
     <item
         android:id="@+id/nav_settings"
@@ -23,7 +23,7 @@
     <item
         android:id="@+id/nav_about"
         android:title="@string/about"
-        android:icon="@drawable/messages"
+        android:icon="@drawable/aboutt"
         />
 
     <item

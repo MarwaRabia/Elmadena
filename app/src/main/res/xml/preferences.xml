@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <PreferenceCategory android:title="Customize Styles">
+
+
+        <ListPreference
+            android:defaultValue="@string/settings_color_default"
+            android:entries="@array/settings_color_labels"
+            android:entryValues="@array/settings_color_values"
+            android:key="@string/settings_color_key"
+            android:title="@string/settings_color_label"
+            android:summary="you can change theme from here"/>
+
+        <ListPreference
+            android:defaultValue="@string/settings_text_size_default"
+            android:entries="@array/settings_text_size_labels"
+            android:entryValues="@array/settings_text_size_values"
+            android:key="@string/settings_text_size_key"
+            android:title="@string/settings_text_size_label"
+            android:summary="you can change font from here"
+        />
+
+    </PreferenceCategory>
+
+
+</PreferenceScreen>

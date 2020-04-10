@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+
+    tools:context=".MainActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/setupToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@drawable/gradient"
+      android:gravity="center"
+      >
+
+        <Button
+            android:id="@+id/bt_inform"
+            android:padding="10dp"
+            android:textColor="@color/colorPrimaryDark"
+            android:background="@drawable/button_style"
+            android:textSize="30sp"
+            android:text="معلومات عن البرنامج"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_margin="10dp"
+
+  />
+        <Button
+            android:id="@+id/bt_publish"
+            android:padding="10dp"
+            android:textColor="@color/colorPrimaryDark"
+            android:background="@drawable/button_style"
+            android:textSize="30sp"
+            android:text="أنشر البرنامج"
+            android:layout_margin="10dp"
+
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"/>
+        <Button
+            android:id="@+id/bt_assess"
+            android:layout_below="@+id/bt_publish"
+            android:padding="10dp"
+            android:textColor="@color/colorPrimaryDark"
+            android:background="@drawable/button_style"
+            android:layout_margin="10dp"
+
+            android:textSize="30sp"
+            android:text="تقييم البرنامج"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"/>
+        <Button
+            android:id="@+id/bt_send_sugg"
+            android:layout_below="@+id/bt_assess"
+            android:padding="10dp"
+            android:textColor="@color/colorPrimaryDark"
+            android:background="@drawable/button_style"
+            android:textSize="30sp"
+            android:text="أرسل اقتراحك"
+            android:layout_margin="10dp"
+
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"/>
+
+    </LinearLayout>
+
+
+
+
+
+
+
+</LinearLayout>

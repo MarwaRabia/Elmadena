@@ -16,6 +16,19 @@
             layout="@layout/app_bar"
             ></include>
 
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/add_post_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/action_add"
+            android:layout_marginRight="20dp" />
+
         <FrameLayout
             android:id="@+id/main_container"
             android:layout_width="match_parent"
@@ -23,25 +36,27 @@
             android:layout_alignParentStart="true"
             android:layout_below="@id/main_page_toolbar"
             android:layout_alignParentLeft="true">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/all_users_posts"
-                android:layout_width="match_parent"
-                android:layout_height="653dp"
-               />
         </FrameLayout>
-        <ImageButton
-            android:id="@+id/add_new_post_button"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_above="@id/main_container"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:src="@drawable/add_foreground"
-            android:layout_marginBottom="4dp"
-            android:layout_marginEnd="12dp"
-            android:focusableInTouchMode="false"
-            android:layout_marginRight="12dp" />
+
+
+<!--        <ImageButton-->
+<!--            android:id="@+id/add_new_post_button"-->
+<!--            android:layout_width="48dp"-->
+<!--            android:layout_height="48dp"-->
+<!--            android:layout_above="@id/main_container"-->
+<!--            android:layout_alignParentEnd="true"-->
+<!--            android:layout_alignParentRight="true"-->
+<!--            android:src="@drawable/add_foreground"-->
+<!--            android:layout_marginBottom="4dp"-->
+<!--            android:layout_marginEnd="12dp"-->
+<!--            android:focusableInTouchMode="false"-->
+<!--            android:layout_marginRight="12dp" />-->
+
+
+
+
+
+
     </RelativeLayout>
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
